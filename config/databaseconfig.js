@@ -3,7 +3,7 @@
  /*************************************************************************************
  * @description Following url is use for database it must be connected with database  
  *************************************************************************************/
- const url = 'mongodb://localhost:27017/Greetings';
+ const url = 'mongodb://localhost:27017/Greeting_database';
 
 mongoose.Promise = global.Promise;
 

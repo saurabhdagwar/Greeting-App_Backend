@@ -29,6 +29,7 @@ app.use(bodyParser.json());
  * @description given path defines databaseconfig.js file which connects with database
  *************************************************************************************/
  require('./config/databaseconfig.js');
+ require('./routes/greeting.routes.js')(app);
 
  /*************************************************************************************
   * @description Following code will give resposce for server is connected or not 
