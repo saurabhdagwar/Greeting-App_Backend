@@ -1,6 +1,6 @@
 const Greeting = require('../models/greeting.model.js')
 /*************************************************************************************
- * @description Following code is used to post code on data base
+ * @description Following code is used to post data on database
  * NOTES - Create new Greeting Message
  *************************************************************************************/
 exports.create = (req, res) => {
@@ -17,5 +17,20 @@ exports.create = (req, res) => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({message: err.message || "Error Occurred while creating Greeting"});
+    });
+}; 
+
+/*************************************************************************************
+ * @description Following code is used to get data from database
+ * NOTES - Retriving Greeting Message from database
+ *************************************************************************************/
+exports.findAll = (req, res) => {
+    Greeting.find()
+    .then(greeting => {
+        res.send(greeting);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Error Occurred while retriving all Greeting"
+        });
     });
 }; 
