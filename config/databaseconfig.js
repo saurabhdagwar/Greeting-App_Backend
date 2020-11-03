@@ -1,8 +1,15 @@
-const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/Greetings';
+ const mongoose = require('mongoose');
+
+ /*************************************************************************************
+ * @description Following url is use for database it must be connected with database  
+ *************************************************************************************/
+ const url = 'mongodb://localhost:27017/Greetings';
+
 mongoose.Promise = global.Promise;
 
-// Connecting to the database
+/*************************************************************************************
+ * @description following program defines database is connected or not
+ *************************************************************************************/
 mongoose.connect(url, {
     useNewUrlParser: true
 }).then(() => {
