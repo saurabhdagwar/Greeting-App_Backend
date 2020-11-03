@@ -54,18 +54,43 @@ exports.update = (req, res) => {
     .then(greeting => {
         if(!greeting) {
             return res.status(404).send({
-                message: "Greeting Not found with id" +req.params.greetingId
+                message: "Greeting Not found with id: " +req.params.greetingId
             });
         }
         res.send(greeting);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message:"Greeting Not found with id" +req.params.greetingId
+                message: "Greeting Not found with id: " +req.params.greetingId
             });                
         }
         return res.status(500).send({
-            message: "Error Updating Greeting with Id"  +req.params.greetingId
+            message: "Error Updating Greeting with Id: "  +req.params.greetingId
+        });
+    });
+};
+
+/*************************************************************************************
+ * @description following code is used to delete data from database
+ * NOTES - Delete greeting messages from server
+ *************************************************************************************/
+exports.delete = (req, res) => {
+    Greeting.findByIdAndRemove(req.params.greetingId)
+    .then(greeting => {
+        if(!greeting){
+            return res.status(404).send({
+                message: "Greeting message not found with ID: " +req.params.greetingId
+            });
+        }
+        res.send({message: "Greeting Message Deleted Successfully"});
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound'){
+            return res.status(404).send({
+                message:  "Greeting Not found with id: " +req.params.greetingId
+            });
+        }
+        return res.status(500).send({
+            message: "Error Updating Greeting with Id: "  +req.params.greetingId
         });
     });
 };
