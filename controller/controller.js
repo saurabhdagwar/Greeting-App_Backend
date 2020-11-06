@@ -55,9 +55,9 @@ exports.findAll = (req, res) => {
  *************************************************************************************/
 
 exports.update = (req, res) => {
-  if (!req.body.message || !req.body.name) {
+  if ( !req.body.name) {
     return res.status(400).send({
-      message: "Greeting Name and Message Cannot be Empty",
+      message: "Greeting Name Cannot be Empty",
     });
   }
   greetingId = req.params.greetingId;

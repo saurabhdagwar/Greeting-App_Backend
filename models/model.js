@@ -9,10 +9,11 @@
  *************************************************************************************/
 
 const mongoose = require("mongoose");
+const joi = require('joi');
 const GreetingSchema = mongoose.Schema(
   {
-    name: String,
-    message: String,
+    name: joi.string().min(5).max(20).required(),
+    message: joi.string().min(5).optional(),
   },
   {
     timestamps: true,
