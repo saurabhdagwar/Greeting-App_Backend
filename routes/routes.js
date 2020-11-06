@@ -9,7 +9,7 @@
  *************************************************************************************/
 
 module.exports = (app) => {
-  const greeting = require("../controller/greeting.controller.js");
+  const greeting = require("../controller/controller.js");
   app.post("/greeting", greeting.create);
   app.get("/greeting", greeting.findAll);
   app.put("/greeting/:greetingId", greeting.update);

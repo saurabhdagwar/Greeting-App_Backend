@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //  given path defines databaseconfig.js file which connects with database
-require("./config/databaseconfig.js");
-require("./routes/greeting.routes.js")(app);
+require("./config/config.js");
+require("./routes/routes.js")(app);
 
 // Following code will give resposce for server is connected or not
 app.get("/", (res) => {
