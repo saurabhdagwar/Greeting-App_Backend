@@ -7,11 +7,11 @@
  * @version     : 14.14.0
  * @since       : 04/11/2020
  *************************************************************************************/
+const controller = require("../controller/controller.js");
 
 module.exports = (app) => {
-  const greeting = require("../controller/controller.js");
-  app.post("/greeting", greeting.create);
-  app.get("/greeting", greeting.findAll);
-  app.put("/greeting/:greetingId", greeting.update);
-  app.delete("/greeting/:greetingId", greeting.delete);
+  app.post("/greeting", controller.createGreeting);
+  app.get("/greeting", controller.receiveGreeting);
+  app.put("/greeting/:greetingId", controller.updateGreeting);
+  app.delete("/greeting/:greetingId", controller.deleteGreeting);
 };

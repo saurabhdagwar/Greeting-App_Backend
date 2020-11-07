@@ -9,20 +9,19 @@
  *************************************************************************************/
 
 const mongoose = require("mongoose");
-const joi = require('joi');
+
 
 //Defined Schema to send data in JSON format
 const GreetingSchema = mongoose.Schema(
   {
-    name: joi.string().min(5).max(20).required(),
-    message: joi.string().min(5).optional(),
+    name: String,
+    message: String,
   },
   {
     timestamps: true,
   }
 );
 let Schema = mongoose.model("Greeting", GreetingSchema);
-
 
 class model {
   //pushData Save Greeting Data on Database

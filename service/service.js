@@ -9,29 +9,29 @@ const model = require("../models/model.js");
 class service {
 
 //Create function which pass data towards model 
-  create = (data, fun) => {
+  createGreeting = (data, callback) => {
     model.pushData(data, function (err, data) {
       if (err) {
-        fun(err, null);
+        callback(err, null);
       } else {
-        fun(null, data);
+        callback(null, data);
       }
     });
   };
 
 //Receive function which pass data towards model 
-  receive = (fun) => {
+  receiveGreeting = (callback) => {
     model.getData(function (err, data) {
       if (err) {
-        fun(err, null);
+        callback(err, null);
       } else {
-        fun(null, data);
+        callback(null, data);
       }
     });
   };
 
   //Update function which pass data towards model 
-  update = (greetingIdfun, greeting, callback) => {
+  updateGreeting = (greetingIdfun, greeting, callback) => {
     model.putData(greetingIdfun, greeting, function (err, greeting) {
       if (err) {
         callback(err, null);
@@ -42,7 +42,7 @@ class service {
   };
 
   //Remove function which pass data towards model 
-  remove = (greetingId, callback) => {
+  deleteGreeting = (greetingId, callback) => {
     model.deleteData(greetingId, function (err) {
       if (err) {
         callback(err);
