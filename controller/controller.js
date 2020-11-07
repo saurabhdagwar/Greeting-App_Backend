@@ -9,13 +9,14 @@
  *************************************************************************************/
 
 const service = require("../service/service.js");
-/*************************************************************************************
- * @description Following code is used to post data on database
- * NOTES - Create new Greeting Message
- *************************************************************************************/
+const result = {};
+// Following code is used to post greeting on database
 exports.create = (req, res) => {
   if (!req.body.message) {
-    return res.status(400).send({ message: "Note content can not be empty" });
+    result.success = false;
+    result.data = err;
+    result.message =  "Note content can not be empty"
+    return res.status(400).send(result);
   }
   const greeting = {
     name: req.body.name,
@@ -23,46 +24,50 @@ exports.create = (req, res) => {
   };
   service.create(greeting, function (err, data) {
     if (err) {
-      res.status(500).send({
-        message: err.message || "Error Occurred while creating Greeting",
-      });
+      result.success = false;
+      result.data = err;
+      result.message =  "Error Occurred while creating Greeting"
+      res.status(500).send(result);
     } else {
-      res.send(data);
+      result.success = true;
+      result.data = data;
+      result.message =  "Successfully Created Gretting"
+      res.send(result);
     }
   });
 };
 
-/*************************************************************************************
- * @description Following code is used to get data from database
- * NOTES - Retriving Greeting Message from database
- *************************************************************************************/
-
+// Following code is used receving greeting from database
 exports.findAll = (req, res) => {
   service.receive(function (err, data) {
     if (err) {
-      res.status(500).send({
-        message: err.message || "Error Occurred while retriving all Greeting",
-      });
+      result.success = false;
+      result.data = err;
+      result.message =  "Error Occurred while retriving all Greeting"
+      res.status(500).send(result);
     } else {
-      res.send(data);
+      result.success = false;
+      result.data = err;
+      result.message =  "Successfully Recieve all Greetings "
+      res.send(result);
     }
   });
 };
 
-/*************************************************************************************
- * @description Following code is used to update data from database
- * NOTES - Updating Greeting Message from database
- *************************************************************************************/
-
+//Following code is used to update greeting from database
 exports.update = (req, res) => {
   if ( !req.body.name) {
-    return res.status(400).send({
-      message: "Greeting Name Cannot be Empty",
-    });
+    result.success = false;
+    result.data = err;
+    result.message = "Greeting Name Cannot be Empty"
+    res.status(400).send(result);
   }
   greetingId = req.params.greetingId;
   if (!greetingId) {
-    return res.send({ message: "Greeting Id is invalid" });
+    result.success = false;
+    result.data = err;
+    result.message = "Greeting Id is invalid"
+    res.send(result);
   }
   const greeting = {
     name: req.body.name || "Name Required",
@@ -70,35 +75,45 @@ exports.update = (req, res) => {
   };
   service.update(greetingId, greeting, function (err, data) {
     if (err) {
-      return res.status(404).send({
-        message: "Greeting Not found with id: " + req.params.greetingId,
-      });
+      result.success = false;
+      result.data = err;
+      result.message = "Greeting Not found with id: " + req.params.greetingId
+      res.status(404).send(result);
+      
     } else if (data) {
-      res.send(greeting);
+      result.success = true;
+      result.data = greeting;
+      result.message = "Successfully Updated Greeting with Greeting ID: " + req.params.greetingId
+      res.send(result);
     } else {
-      return res.status(500).send({
-        message: "Error Updating Greeting with Id: " + req.params.greetingId,
-      });
+      result.success = false;
+      result.data = err;
+      result.message ="Error Updating Greeting with Id: " + req.params.greetingId
+      res.status(500).send(result);
     }
   });
 };
-/*************************************************************************************
- * @description following code is used to delete data from database
- * NOTES - Delete greeting messages from server
- *************************************************************************************/
+
+// following code is used to delete data from database
 exports.delete = (req, res) => {
   let greetingId = req.params.greetingId;
   if (!greetingId) {
-    return res.send({ message: "Greeting Id is invalid " });
+    result.success = false;
+    result.data = err;
+    result.message ="Greeting Id is invalid " + req.params.greetingId
+    res.send(result);
   }
   service.remove(greetingId, function (err) {
     if (err) {
-      return res.status(404).send({
-        message:
-          "Error occured while deleting Greeting of GreetingId: " +
-          req.params.greetingId,
-      });
+      result.success = false;
+      result.data = err;
+      result.message = "Error occured while deleting Greeting of GreetingId: " +req.params.greetingId
+      res.send(result);
     }
-    return res.send({ message: "Greeting Message Deleted Successfully" });
+    result.success = true;
+    result.data = "Deleted: "+greetingId;
+    result.message ="Greeting Message Deleted Successfully"
+    res.send(result);
+   
   });
 };

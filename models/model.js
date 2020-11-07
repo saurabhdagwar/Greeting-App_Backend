@@ -10,6 +10,8 @@
 
 const mongoose = require("mongoose");
 const joi = require('joi');
+
+
 const GreetingSchema = mongoose.Schema(
   {
     name: joi.string().min(5).max(20).required(),
@@ -19,7 +21,7 @@ const GreetingSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Greeting", GreetingSchema);
+module.exports = mongoose.model("Graeeting", GreetingSchema);
 let Schema = mongoose.model("Greeting", GreetingSchema);
 
 class model {
@@ -67,4 +69,5 @@ class model {
     });
   };
 }
+
 module.exports = new model();
