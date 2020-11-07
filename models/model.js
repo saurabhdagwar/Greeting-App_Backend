@@ -10,8 +10,6 @@
 
 const mongoose = require("mongoose");
 
-
-//Defined Schema to send data in JSON format
 const GreetingSchema = mongoose.Schema(
   {
     name: String,
@@ -24,7 +22,9 @@ const GreetingSchema = mongoose.Schema(
 let Schema = mongoose.model("Greeting", GreetingSchema);
 
 class model {
-  //pushData Save Greeting Data on Database
+  /*
+   * pushData Save Greeting Data on Database
+   */
   pushData = (data, callback) => {
     const schema = new Schema({
       name: data.name,
@@ -40,7 +40,9 @@ class model {
       });
   };
 
-//getData method retrive all data from database
+  /*
+   * getData method retrive all data from database
+   */
   getData = (callback) => {
     Schema.find(function (err, greeting) {
       if (err) {
@@ -49,8 +51,9 @@ class model {
       return callback(null, greeting);
     });
   };
-
-//putData method update data according with ID from database
+  /*
+   * putData method update data according with ID from database
+   */
   putData = (greetingId, data, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndUpdate(greetingId, data, function (err) {
@@ -61,7 +64,9 @@ class model {
     });
   };
 
-//deleteData method delete data according with ID
+  /*
+   * deleteData method delete data according with ID
+   */
   deleteData = (greetingId, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndRemove(greetingId, function (err) {
