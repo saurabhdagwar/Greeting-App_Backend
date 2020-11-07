@@ -11,7 +11,7 @@
 const mongoose = require("mongoose");
 const joi = require('joi');
 
-
+//Defined Schema to send data in JSON format
 const GreetingSchema = mongoose.Schema(
   {
     name: joi.string().min(5).max(20).required(),
@@ -21,10 +21,11 @@ const GreetingSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Graeeting", GreetingSchema);
 let Schema = mongoose.model("Greeting", GreetingSchema);
 
+
 class model {
+  //pushData Save Greeting Data on Database
   pushData = (data, callback) => {
     const schema = new Schema({
       name: data.name,
@@ -40,6 +41,7 @@ class model {
       });
   };
 
+//getData method retrive all data from database
   getData = (callback) => {
     Schema.find(function (err, greeting) {
       if (err) {
@@ -49,6 +51,7 @@ class model {
     });
   };
 
+//putData method update data according with ID from database
   putData = (greetingId, data, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndUpdate(greetingId, data, function (err) {
@@ -59,6 +62,7 @@ class model {
     });
   };
 
+//deleteData method delete data according with ID
   deleteData = (greetingId, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndRemove(greetingId, function (err) {
