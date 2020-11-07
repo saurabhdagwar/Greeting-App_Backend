@@ -22,9 +22,9 @@ const GreetingSchema = mongoose.Schema(
 let Schema = mongoose.model("Greeting", GreetingSchema);
 
 class model {
-  /*
-   * pushData Save Greeting Data on Database
-   */
+  /** 
+   * @description pushData Save Greeting Data on Database
+  **/
   pushData = (data, callback) => {
     const schema = new Schema({
       name: data.name,
@@ -40,9 +40,9 @@ class model {
       });
   };
 
-  /*
-   * getData method retrive all data from database
-   */
+  /**
+   * @description getData method retrive all data from database
+   **/
   getData = (callback) => {
     Schema.find(function (err, greeting) {
       if (err) {
@@ -51,9 +51,10 @@ class model {
       return callback(null, greeting);
     });
   };
-  /*
-   * putData method update data according with ID from database
-   */
+
+  /**
+   * @description putData method update data according with ID from database
+   **/
   putData = (greetingId, data, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndUpdate(greetingId, data, function (err) {
@@ -64,9 +65,9 @@ class model {
     });
   };
 
-  /*
-   * deleteData method delete data according with ID
-   */
+  /**
+   * @description deleteData method delete data according with ID
+   **/
   deleteData = (greetingId, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndRemove(greetingId, function (err) {

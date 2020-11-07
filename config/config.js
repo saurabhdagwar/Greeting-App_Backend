@@ -7,15 +7,15 @@
  *************************************************************************************/
 
 const mongoose = require("mongoose");
-/*
- *Following url is use for database it must be connected with database
- */
+/**
+ * @description Following url is use for database it must be connected with database
+ **/
 const url = "mongodb://localhost:27017/Greeting_database";
 mongoose.Promise = global.Promise;
 
-/*
- * Following program defines database is connected or not
- */
+/**
+ * @description Following program defines database is connected or not
+ **/
 mongoose
   .connect(url, {
     useNewUrlParser: true,

@@ -21,10 +21,9 @@ validateSchema = (data) => {
 };
 
 class controller {
-  /*
+  /** 
    * @description Following code is used to post data on database
-   * NOTES - Create new Greeting Message
-   */
+   **/
   createGreeting = (req, res) => {
     const { error } = validateSchema(req.body);
     if (error) {
@@ -49,10 +48,9 @@ class controller {
     }
   };
 
-  /*
+  /** 
    * @description Following code is used to get data from database
-   * NOTES - Retriving Greeting Message from database
-   */
+   **/
   receiveGreeting = (req, res) => {
     service.receiveGreeting(function (err, data) {
       if (err) {
@@ -69,10 +67,9 @@ class controller {
     });
   };
 
-  /*
+  /** 
    * @description Following code is used to update data from database
-   * NOTES - Updating Greeting Message from database
-   */
+   **/
   updateGreeting = (req, res) => {
     let greetingId = req.params.greetingId;
     const { error } = validateSchema(req.body);
@@ -117,10 +114,9 @@ class controller {
     }
   };
 
-  /*
-   * @description following code is used to delete data from database
-   * NOTES - Delete greeting messages from server
-   */
+  /** 
+   @description following code is used to delete data from database
+   **/
   deleteGreeting = (req, res) => {
     let greetingId = req.params.greetingId;
     if (!greetingId) {
