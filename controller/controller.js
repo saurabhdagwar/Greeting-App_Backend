@@ -1,8 +1,7 @@
 /***********************************************************************************
  * Purpose      : Following Programs having all methods of CRUD operatios
  * @file        : controller.js
- * @overview    : Check whether connected to local host or not
- * @module      : 1. Express    2. mongoose     3. mongodb      4. body-parser
+ * @module      : 1. servise 
  * @author      : Saurabh Dagwar
  * @version     : 14.14.0
  * @since       : 04/11/2020
@@ -11,7 +10,11 @@
 const service = require("../service/service.js");
 const result = {};
 const joi = require("joi");
-
+/**
+ * @function validateSchema it validates request data according with JOI validation
+ * @var {String} name must required length between five to twenty character
+ * @var {String} message must required minimum length five character
+ */
 validateSchema = (data) => {
   const schema = joi.object({
     name: joi.string().min(5).max(20).required(),
@@ -22,7 +25,8 @@ validateSchema = (data) => {
 
 class controller {
   /** 
-   * @description Following code is used to post data on database
+   * @function createGreeting is used to handle request and response to create Greeting
+   * @method createGreeting call the service createGreting method with callback 
    **/
   createGreeting = (req, res) => {
     const { error } = validateSchema(req.body);
@@ -49,7 +53,8 @@ class controller {
   };
 
   /** 
-   * @description Following code is used to get data from database
+   * @function receiveGreeting is used to handle request and response to retrive greeting
+   * @method receiveGreeting call the service receive method with callback 
    **/
   receiveGreeting = (req, res) => {
     service.receiveGreeting(function (err, data) {
@@ -68,7 +73,9 @@ class controller {
   };
 
   /** 
-   * @description Following code is used to update data from database
+   *@function updateGreeting is used to handle request and response to edit greeting information
+     * @var GreetingId defines greeting ID
+     * @method updateGreeting call the service update method with callback function
    **/
   updateGreeting = (req, res) => {
     let greetingId = req.params.greetingId;
@@ -115,8 +122,10 @@ class controller {
   };
 
   /** 
-   @description following code is used to delete data from database
-   **/
+  * @function deleteGreeting is used to handle request and response to delete Greeting
+  * @var GreetingId defines greeting ID
+  * @method deleteGreeting call the service delete method with callback 
+  **/
   deleteGreeting = (req, res) => {
     let greetingId = req.params.greetingId;
     if (!greetingId) {

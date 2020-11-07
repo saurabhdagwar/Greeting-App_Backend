@@ -8,27 +8,28 @@
  * @version     : 14.14.0
  * @since       : 03/11/2020
  *************************************************************************************/
-/**
- * @description Following dependencies need to be installed before execution of file
- **/
-const express = require("express");
+
+ const express = require("express");
 const bodyParser = require("body-parser");
-const { deleteGreeting } = require("./service/service.js");
 
 /**
- * @description app defines express given below
+ * @param {object} app as an express which uses bodyparser with json format
+ * 
  **/
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /** 
- *  @description given path defines databaseconfig.js file which connects with database
+ * @module config.js file which connects with database
+ * @module routes.js uses express app to call all functions
  **/
 require("./config/config.js");
 require("./routes/routes.js")(app);
+
 /** 
- * @description Following code will give resposce for server is connected or not
+ * @method get it simply used to return message
+ * @method listen it used to listen 4000 port for connection
  **/
 app.get("/", (res) => {
   res.json({ message: "Welcome To Greeting Application " });

@@ -1,8 +1,7 @@
 /***********************************************************************************
  * Purpose      : Following Programs defines Schema
  * @file        : model.js
- * @overview    : Check whether connected to local host or not
- * @module      : 1. Express    2. mongoose     3. mongodb      4. body-parser
+ * @module      : 1. mongoose  
  * @author      : Saurabh Dagwar
  * @version     : 14.14.0
  * @since       : 05/11/2020
@@ -10,6 +9,11 @@
 
 const mongoose = require("mongoose");
 
+/**
+ * @param {object} GreetingSchema defines mongoose Schema to define structure of greeting
+ * @var {String} name
+ * @var {String} message 
+ */
 const GreetingSchema = mongoose.Schema(
   {
     name: String,
@@ -22,8 +26,10 @@ const GreetingSchema = mongoose.Schema(
 let Schema = mongoose.model("Greeting", GreetingSchema);
 
 class model {
+
   /** 
-   * @description pushData Save Greeting Data on Database
+   * @function pushData Save Greeting Data on Database
+   * @var {Object} schema is used to take data from server call save method
   **/
   pushData = (data, callback) => {
     const schema = new Schema({
@@ -41,7 +47,7 @@ class model {
   };
 
   /**
-   * @description getData method retrive all data from database
+   * @function getData retrive all data from database
    **/
   getData = (callback) => {
     Schema.find(function (err, greeting) {
@@ -53,7 +59,7 @@ class model {
   };
 
   /**
-   * @description putData method update data according with ID from database
+   * @function putData update data according with ID from database
    **/
   putData = (greetingId, data, callback) => {
     mongoose.set("useFindAndModify", false);
@@ -66,7 +72,7 @@ class model {
   };
 
   /**
-   * @description deleteData method delete data according with ID
+   * @function deleteData delete data having given ID
    **/
   deleteData = (greetingId, callback) => {
     mongoose.set("useFindAndModify", false);

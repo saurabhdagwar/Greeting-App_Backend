@@ -1,6 +1,7 @@
 /***********************************************************************************
  * Purpose      : Service should contains business logic
  * @file        : service.js
+ * @module      : model.js
  * @author      : Saurabh Dagwar
  * @since       : 06/11/2020
  *************************************************************************************/
@@ -9,7 +10,8 @@ const model = require("../models/model.js");
 class service {
 
   /** 
-   * @description creategreeting function which pass data towards model
+   * @function createGreeting function which pass data towards model method
+   * @method pushData calls model according with function
    **/
   createGreeting = (data, callback) => {
     model.pushData(data, function (err, data) {
@@ -22,7 +24,8 @@ class service {
   };
 
   /**
-   * @description ReceiveGreeting function which pass data towards model
+   * @function ReceiveGreeting which pass data towards model
+   * @method getData call model method according with callback
    **/
   receiveGreeting = (callback) => {
     model.getData(function (err, data) {
@@ -35,7 +38,8 @@ class service {
   };
 
   /**
-   *@description Update function which pass data towards model
+   * @function updateGreeting  which pass data towards model
+   * @method putData call model method according with callback
    **/
   updateGreeting = (greetingIdfun, greeting, callback) => {
     model.putData(greetingIdfun, greeting, function (err, greeting) {
@@ -48,7 +52,8 @@ class service {
   };
 
   /**
-   * @description deleteGreeting function which pass data towards model
+   * @function deleteGreeting which pass data towards model
+   * @method deleteData call model method according with callback
    **/
   deleteGreeting = (greetingId, callback) => {
     model.deleteData(greetingId, function (err) {
