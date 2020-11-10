@@ -32,14 +32,14 @@ class controller {
     const { error } = validateSchema(req.body);
     if (error) {
       result.success = false;
-      result.data = error;
+//      result.data = error;
       result.message = "Greeting Content Cannot in Proper format";
       res.status(400).send(result);
     } else {
       service.createGreeting(req.body, function (err, data) {
         if (err) {
           result.success = false;
-          result.data = err;
+//          result.data = err;
           result.message = "Error Occurred while creating Greeting";
           res.status(500).send(result);
         } else {
@@ -60,10 +60,16 @@ class controller {
     service.receiveGreeting(function (err, data) {
       if (err) {
         result.success = false;
-        result.data = err;
+//        result.data = err;
         result.message = "Error Occurred while retriving all Greeting";
         res.status(500).send(result);
-      } else {
+      }
+      else if(data == "") {
+        result.success = true;
+        result.message = "There is no data in database ";
+        res.send(result);
+      }
+      else {
         result.success = true;
         result.data = data;
         result.message = "Successfully Recieve all Greetings ";
@@ -82,13 +88,13 @@ class controller {
     const { error } = validateSchema(req.body);
     if (error) {
       result.success = false;
-      result.data = error;
+//      result.data = error;
       result.message = "Greeting Content Cannot in Proper format";
       res.status(400).send(result);
     } else {
       if (!greetingId) {
         result.success = false;
-        result.data = err;
+//        result.data = err;
         result.message = "Greeting Id is invalid";
         res.send(result);
       }
@@ -99,7 +105,7 @@ class controller {
       service.updateGreeting(greetingId, greeting, function (err, data) {
         if (err) {
           result.success = false;
-          result.data = err;
+//          result.data = err;
           result.message =
             "Greeting Not found with id: " + req.params.greetingId;
           res.status(404).send(result);
@@ -112,7 +118,7 @@ class controller {
           res.send(result);
         } else {
           result.success = false;
-          result.data = err;
+//          result.data = err;
           result.message =
             "Error Updating Greeting with Id: " + req.params.greetingId;
           res.status(500).send(result);
@@ -130,14 +136,14 @@ class controller {
     let greetingId = req.params.greetingId;
     if (!greetingId) {
       result.success = false;
-      result.data = err;
+//      result.data = err;
       result.message = "Greeting Id is invalid " + req.params.greetingId;
       res.send(result);
     }
     service.deleteGreeting(greetingId, function (err) {
       if (err) {
         result.success = false;
-        result.data = err;
+//        result.data = err;
         result.message =
           "Error occured while deleting Greeting of GreetingId: " +
           req.params.greetingId;

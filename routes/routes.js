@@ -8,6 +8,12 @@
  *************************************************************************************/
 const controller = require("../controller/controller.js");
 
+/**
+ * @method post Create a new Greeting
+ * @method get List all existing  Greeting
+ * @method put edit Greeting
+ * @method delete Create perticular Greeting
+ */
 module.exports = (app) => {
   app.post("/greeting", controller.createGreeting);
   app.get("/greeting", controller.receiveGreeting);

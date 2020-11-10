@@ -30,8 +30,9 @@ class model {
   /** 
    * @function pushData Save Greeting Data on Database
    * @var {Object} schema is used to take data from server call save method
+   * @method save is used to insert given schema into database
   **/
-  pushData = (data, callback) => {
+ createGreeting = (data, callback) => {
     const schema = new Schema({
       name: data.name,
       message: data.message,
@@ -48,8 +49,9 @@ class model {
 
   /**
    * @function getData retrive all data from database
+   * @method find is used to list all schema from database
    **/
-  getData = (callback) => {
+  receiveGreeting = (callback) => {
     Schema.find(function (err, greeting) {
       if (err) {
         return callback(err, null);
@@ -60,8 +62,9 @@ class model {
 
   /**
    * @function putData update data according with ID from database
+   * @method findByIdAndUpdate is used to update schema from database using ID
    **/
-  putData = (greetingId, data, callback) => {
+  updateGreeting = (greetingId, data, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndUpdate(greetingId, data, function (err) {
       if (err) {
@@ -73,8 +76,9 @@ class model {
 
   /**
    * @function deleteData delete data having given ID
+   * @method findByIdAndRemove is used to delete schema from database using ID
    **/
-  deleteData = (greetingId, callback) => {
+  deleteGreeting = (greetingId, callback) => {
     mongoose.set("useFindAndModify", false);
     Schema.findByIdAndRemove(greetingId, function (err) {
       if (err) {

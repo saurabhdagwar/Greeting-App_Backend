@@ -21,6 +21,8 @@
     "joi": "^17.3.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.11",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "swagger-jsdoc": "^5.0.1",
+    "swagger-ui-express": "^4.1.4"
   }
 }

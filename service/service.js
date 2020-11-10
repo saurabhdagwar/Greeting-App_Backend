@@ -8,13 +8,13 @@
 
 const model = require("../models/model.js");
 class service {
-
+  
   /** 
    * @function createGreeting function which pass data towards model method
    * @method pushData calls model according with function
-   **/
+   */
   createGreeting = (data, callback) => {
-    model.pushData(data, function (err, data) {
+    model.createGreeting(data, function (err, data) {
       if (err) {
         callback(err, null);
       } else {
@@ -26,9 +26,9 @@ class service {
   /**
    * @function ReceiveGreeting which pass data towards model
    * @method getData call model method according with callback
-   **/
+   */
   receiveGreeting = (callback) => {
-    model.getData(function (err, data) {
+    model.receiveGreeting(function (err, data) {
       if (err) {
         callback(err, null);
       } else {
@@ -40,9 +40,9 @@ class service {
   /**
    * @function updateGreeting  which pass data towards model
    * @method putData call model method according with callback
-   **/
+   */
   updateGreeting = (greetingIdfun, greeting, callback) => {
-    model.putData(greetingIdfun, greeting, function (err, greeting) {
+    model.updateGreeting(greetingIdfun, greeting, function (err, greeting) {
       if (err) {
         callback(err, null);
       } else {
@@ -54,9 +54,9 @@ class service {
   /**
    * @function deleteGreeting which pass data towards model
    * @method deleteData call model method according with callback
-   **/
+   */
   deleteGreeting = (greetingId, callback) => {
-    model.deleteData(greetingId, function (err) {
+    model.deleteGreeting(greetingId, function (err) {
       if (err) {
         callback(err);
       } else {
