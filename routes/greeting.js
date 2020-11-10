@@ -6,7 +6,7 @@
  * @version     : 14.14.0
  * @since       : 04/11/2020
  *************************************************************************************/
-const controller = require("../controller/controller.js");
+const controller = require("../controller/greeting.js");
 
 /**
  * @method post Create a new Greeting

@@ -11,6 +11,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const logger = require('./loggre.js');
 
 /**
  * @param {object} app as an express which uses bodyparser with json format 
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
  * @module routes.js uses express app to call all functions
  */
 require("./config/config.js");
-require("./routes/routes.js")(app);
+require("./routes/greeting.js")(app);
 
 /**
  * @method get it simply used to return message
@@ -35,4 +36,6 @@ app.get("/", (req,res) => {
 });
 app.listen(4000, () => {
   console.log("Server is listening on port 4000");
+ 
 });
+
