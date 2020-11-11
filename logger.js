@@ -8,16 +8,19 @@
  *************************************************************************************/
 const winston = require("winston");
 /**
- * @description creating new logger using winston createLogger method
- * @description store all logs of level error in errors.lof file
- * @description store all logs of info level in executed.log file
+ * @description creating new logger using winston createLogger method and stored logs in error and info file
  */
 const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
   transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: "executed.log" , level:'info' }),
-    new winston.transports.File({filename: 'errors.log', level: 'error' })
+    new winston.transports.File({
+        filename: './GreetingLogs/errors.log',
+        level: 'error'
+      }),
+    new winston.transports.File({
+      filename: './GreetingLogs/info.log',
+      level: 'info'
+    })
   ]
 });
-module.exports = {logger};
+module.exports = logger;

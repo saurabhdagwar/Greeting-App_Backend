@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Greeting and Messaging app",
+    "description": "Greeting Application can be inserted, recived, updated and delete greeting from database "
+  },
+  "license": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+},
+  "paths": {
+    "/Greeting": {
+      "get": {
+        "tags": ["Greeting"],
+        "summary": "Reciving all Greeting from server",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Greeting" }
+          },
+          "400": {
+            "description": "Invalid Greeting supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Greeting"],
+        "summary": "Create New Greeting ",
+        "parameters": [
+          {
+            "name": "Greeting Name",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Greeting"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": { "description": "New Greeting Created" },
+          "400": { "description": "Invalid Greeting supplied" }
+        }
+      }
+    },
+    "/Greeting/{id}": {
+      "parameters": [
+        {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the Greeting that we want to match",
+            "type": "string"
+        }
+    ],
+      "put": {
+        "tags": ["Greeting"],
+        "summary": "Update Greating using ID",
+
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of Greeting that we want to update",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/id"
+          }
+          },{
+              "name": "Greeting Name",
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/Greeting"
+              }
+          }
+        ],
+       
+        "responses": {
+          "200": { "description": "Edited Greeting Successfully" },
+          "400": { "description": "Invalid Greeting ID" }
+        }
+      },
+
+      "delete": {
+        "tags": ["Greeting"],
+        "summary": "Delete Greeting with given ID",
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "$ref": "#/definitions/id"
+          },
+            "required": true,
+            "description": "ID of Greeting that we want to update"
+        }],
+        "responses": {
+          "200": { "description": "Greeting Deleted Successfully" },
+          "400": { "description": "Invalid Greeting ID " },
+          "404": { "description": "Not Found Greeting of this ID" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+          "_id": {
+              "type": "string"
+          }
+      }
+  },
+    "Greeting": {
+      "required": ["name", "message"],
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "pattern": "^[A-Za-z]{5,20}$" },
+        "message": { "type": "string", "pattern": "^[A-Za-z0-9]{5,}$" }
+      }
+    }
+  }
+}

@@ -11,7 +11,8 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const logger = require('./loggre.js');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./Swagger/swagger.json');
 
 /**
  * @param {object} app as an express which uses bodyparser with json format 
@@ -35,7 +36,7 @@ app.get("/", (req,res) => {
   res.json({ "message": "Welcome To Greeting Application " });
 });
 app.listen(4000, () => {
+  app.use('/swagger',swaggerUi.serve,swaggerUi.setup(swaggerDocument));
   console.log("Server is listening on port 4000");
- 
 });
 

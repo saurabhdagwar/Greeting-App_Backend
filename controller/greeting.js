@@ -10,7 +10,7 @@
 const service = require("../service/greeting.js");
 const result = {};
 const joi = require("joi");
-const logger = require("../loggre.js");
+const logger = require("../logger.js");
 /**
  * @function validateSchema it validates request data according with JOI validation
  * @var {String} name must required length between five to twenty character
@@ -159,12 +159,15 @@ class controller {
         res.send(result);
         logger.error(result.message);
       }
+      else{
       result.success = true;
-      //result.data = "Deleted: " + req.body.name;
+      result.data = "Deleted "
       result.message = "Greeting Message Deleted Successfully";
       res.send(result);
       logger.info(result.message);
-    });
+    }
+  }
+  );
   };
 }
 module.exports = new controller();
