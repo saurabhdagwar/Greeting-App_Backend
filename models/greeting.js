@@ -1,6 +1,6 @@
 /***********************************************************************************
  * Purpose      : Following Programs defines Schema
- * @file        : model.js
+ * @file        : model/greeting.js
  * @module      : 1. mongoose  
  * @author      : Saurabh Dagwar
  * @version     : 14.14.0
@@ -14,10 +14,24 @@ const mongoose = require("mongoose");
  * @var {String} name
  * @var {String} message 
  */
+
 const GreetingSchema = mongoose.Schema(
   {
-    name: String,
-    message: String,
+    name: {
+      type: String,
+      required: true,
+      length: {
+        min: 4,
+        max: 20
+      }
+    },
+    message: {
+      type: String,
+      required: true,
+      length: {
+        min: 5
+      }
+    },
   },
   {
     timestamps: true,
@@ -27,10 +41,10 @@ let Schema = mongoose.model("Greeting", GreetingSchema);
 
 class model {
 
-  /** 
+  /**
+   * @description recived data and call from service and use save method to create new greeting in database 
    * @function createGreeting Save Greeting Data on Database
    * @var {Object} schema is used to take data from server call save method
-   * @method save is used to insert given schema into database
   **/
  createGreeting = (data, callback) => {
     const schema = new Schema({
@@ -48,24 +62,24 @@ class model {
   };
 
   /**
+   * @description recived call from service and use find method to list all data from database 
    * @function receiveGreeting retrive all data from database
-   * @method find is used to list all schema from database
    **/
   receiveGreeting = (callback) => {
     Schema.find((err, greeting) => {
       if (err) {
-        return callback(err, null);
+        callback(err, null);
       }
-      return callback(null, greeting);
+        callback(null, greeting);
     });
   };
 
   /**
+   * @description recived data from service and use findByIdAndUpdate method to update data from database using ID 
    * @function updateGreeting update data according with ID from database
-   * @method findByIdAndUpdate is used to update schema from database using ID
-   **/
+   *   **/
   updateGreeting = (greetingId, data, callback) => {
-    mongoose.set("useFindAndModify", false);
+  
     Schema.findByIdAndUpdate(greetingId, data, (err) => {
       if (err) {
         return callback(err, null);
@@ -75,11 +89,11 @@ class model {
   };
 
   /**
+   * @description recived data from service and use findByIdAndRemove method to delete schema from database using ID
    * @function deleteGreeting delete data having given ID
-   * @method findByIdAndRemove is used to delete schema from database using ID
    **/
   deleteGreeting = (greetingId, callback) => {
-    mongoose.set("useFindAndModify", false);
+  
     Schema.findByIdAndRemove(greetingId, (err) => {
       if (err) {
         return callback(err);

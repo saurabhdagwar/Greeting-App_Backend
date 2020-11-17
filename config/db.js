@@ -1,6 +1,6 @@
 /***********************************************************************************
  * Purpose      : Connects with database
- * @file        : config.js
+ * @file        : db.js
  * @module      : 1. mongoose  
  * @author      : Saurabh Dagwar
  * @version     : 14.14.0
@@ -13,6 +13,7 @@ const mongoose = require("mongoose");
  **/
 const url = "mongodb://localhost:27017/Greeting_database";
 mongoose.Promise = global.Promise;
+mongoose.set("useFindAndModify", false);
 
 /**
  * @description Following program defines database is connected or not

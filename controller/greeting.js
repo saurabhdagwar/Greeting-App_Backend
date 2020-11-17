@@ -1,6 +1,6 @@
 /***********************************************************************************
  * Purpose      : Following Programs having all methods of CRUD operatios
- * @file        : controller.js
+ * @file        : controller/greeting.js
  * @module      : 1. servise
  * @author      : Saurabh Dagwar
  * @version     : 14.14.0
@@ -8,7 +8,6 @@
  *************************************************************************************/
 
 const service = require("../service/greeting.js");
-const result = {};
 const joi = require("joi");
 const logger = require("../logger.js");
 /**
@@ -18,7 +17,7 @@ const logger = require("../logger.js");
  */
 validateSchema = (data) => {
   const schema = joi.object({
-    name: joi.string().min(5).max(20).required(),
+    name: joi.string().min(4).max(20).required(),
     message: joi.string().min(5).required(),
   });
   return schema.validate(data);
@@ -26,10 +25,11 @@ validateSchema = (data) => {
 
 class controller {
   /**
+   * @description call the service createGreting method with callback 
    * @function createGreeting is used to handle request and response to create Greeting
-   * @method createGreeting call the service createGreting method with callback
    **/
   createGreeting = (req, res) => {
+    const result = {};
     const { error } = validateSchema(req.body);
     if (error) {
       result.success = false;
@@ -57,10 +57,11 @@ class controller {
   };
 
   /**
+   * @description call the service receiveGreeting method with callback and created responce
    * @function receiveGreeting is used to handle request and response to retrive greeting
-   * @method receiveGreeting call the service receive method with callback
    **/
   receiveGreeting = (req, res) => {
+    const result = {};
     service.receiveGreeting((err, data) => {
       if (err) {
         result.success = false;
@@ -89,6 +90,7 @@ class controller {
    * @method updateGreeting call the service update method with callback function
    **/
   updateGreeting = (req, res) => {
+    const result = {};
     let greetingId = req.params.greetingId;
     const { error } = validateSchema(req.body);
     if (error) {
@@ -141,6 +143,7 @@ class controller {
    * @method deleteGreeting call the service delete method with callback
    **/
   deleteGreeting = (req, res) => {
+    const result = {};
     let greetingId = req.params.greetingId;
     if (!greetingId) {
       result.success = false;
@@ -161,7 +164,6 @@ class controller {
       }
       else{
       result.success = true;
-      result.data = "Deleted "
       result.message = "Greeting Message Deleted Successfully";
       res.send(result);
       logger.info(result.message);

@@ -13,11 +13,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./Swagger/swagger.json');
+const cors = require('cors');
 
 /**
  * @param {object} app as an express which uses bodyparser with json format 
  */
 const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -25,7 +27,7 @@ app.use(bodyParser.json());
  * @module config.js file which connects with database
  * @module routes.js uses express app to call all functions
  */
-require("./config/config.js");
+require("./config/db.js");
 require("./routes/greeting.js")(app);
 
 /**

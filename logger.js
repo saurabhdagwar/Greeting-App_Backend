@@ -14,11 +14,11 @@ const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
   transports: [
     new winston.transports.File({
-        filename: './GreetingLogs/errors.log',
+        filename: './Logger/errors.log',
         level: 'error'
       }),
     new winston.transports.File({
-      filename: './GreetingLogs/info.log',
+      filename: './Logger/info.log',
       level: 'info'
     })
   ]
