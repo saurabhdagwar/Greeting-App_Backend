@@ -12,7 +12,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./Swagger/swagger.json');
+const swaggerDocument = require('./swagger/swagger.json');
 const cors = require('cors');
 
 /**
@@ -22,11 +22,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/swagger',swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 /** 
  * @module config.js file which connects with database
  * @module routes.js uses express app to call all functions
  */
+require('dotenv/config');
 require("./config/db.js");
 require("./routes/greeting.js")(app);
 
@@ -37,8 +39,6 @@ require("./routes/greeting.js")(app);
 app.get("/", (req,res) => {
   res.json({ "message": "Welcome To Greeting Application " });
 });
-app.listen(4000, () => {
-  app.use('/swagger',swaggerUi.serve,swaggerUi.setup(swaggerDocument));
-  console.log("Server is listening on port 4000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${process.env.PORT}`);
 });
-

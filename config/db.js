@@ -8,11 +8,12 @@
  *************************************************************************************/
 
 const mongoose = require("mongoose");
+require('dotenv/config');
 /**
  * @param {String} url is use for database it must be connected with database
  **/
-const url = "mongodb://localhost:27017/Greeting_database";
-mongoose.Promise = global.Promise;
+
+ mongoose.Promise = global.Promise;
 mongoose.set("useFindAndModify", false);
 
 /**
@@ -20,7 +21,7 @@ mongoose.set("useFindAndModify", false);
  * NOTES - If it is not connected then giving error and exit from process 
  **/
 mongoose
-  .connect(url, {
+  .connect(process.env.DB_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
